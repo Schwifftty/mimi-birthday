@@ -17,25 +17,47 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         .container {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 16px;
             text-align: center;
-            max-width: 400px;
+            max-width: 500px;
             width: 90%;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
             margin-bottom: 10px;
+            font-size: 2.5em;
         }
 
         .subtitle {
             color: #555;
             margin-bottom: 20px;
+            font-size: 1.1em;
         }
 
         #countdown {
@@ -46,15 +68,21 @@
 
         .time-box {
             background: #f7f7f7;
-            padding: 10px;
+            padding: 15px 10px;
             border-radius: 10px;
             width: 22%;
+            transition: transform 0.3s ease;
+        }
+
+        .time-box:hover {
+            transform: scale(1.05);
         }
 
         .time-box span {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
             display: block;
+            color: #d63384;
         }
 
         .time-box small {
@@ -62,62 +90,297 @@
             color: #666;
         }
 
+        /* Photo Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 25px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .placeholder-slide {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #ffdee9, #b5fffc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: #666;
+        }
+
+        .placeholder-slide h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .slide-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: none;
+            font-size: 24px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .slide-nav:hover {
+            background: white;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .dots {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #d63384;
+        }
+
+        /* Photo Upload */
+        .upload-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f7f7f7;
+            border-radius: 10px;
+        }
+
+        .upload-section h3 {
+            margin-top: 0;
+            color: #d63384;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffdee9, #ff9a9e);
+            color: #d63384;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .upload-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(214, 51, 132, 0.3);
+        }
+
+        /* Music Control */
+        .music-control {
+            margin: 20px 0;
+        }
+
+        .music-button {
+            background: linear-gradient(135deg, #ffdee9, #ff9a9e);
+            color: #d63384;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .music-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(214, 51, 132, 0.3);
+        }
+
         #message {
-            font-size: 16px;
-            line-height: 1.5;
+            font-size: 18px;
+            line-height: 1.6;
             color: #333;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 222, 233, 0.3), rgba(181, 255, 252, 0.3));
+            border-radius: 10px;
+            border-left: 4px solid #d63384;
         }
 
         .hidden {
             display: none;
         }
+
+        .birthday-header {
+            font-size: 2em;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .time-box span {
+                font-size: 20px;
+            }
+            
+            .slide img, .placeholder-slide {
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>For Mimi ❤️</h1>
-        <p class="subtitle">Something special is coming…</p>
-        <div id="countdown">
-            <div class="time-box">
-                <span id="days">0</span>
-                <small>Days</small>
-            </div>
-            <div class="time-box">
-                <span id="hours">0</span>
-                <small>Hours</small>
-            </div>
-            <div class="time-box">
-                <span id="minutes">0</span>
-                <small>Minutes</small>
-            </div>
-            <div class="time-box">
-                <span id="seconds">0</span>
-                <small>Seconds</small>
+        <div id="countdown-section">
+            <h1>For Mimi ❤️</h1>
+            <p class="subtitle">Something special is coming…</p>
+            <div id="countdown">
+                <div class="time-box">
+                    <span id="days">0</span>
+                    <small>Days</small>
+                </div>
+                <div class="time-box">
+                    <span id="hours">0</span>
+                    <small>Hours</small>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">0</span>
+                    <small>Minutes</small>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">0</span>
+                    <small>Seconds</small>
+                </div>
             </div>
         </div>
-        <p id="message" class="hidden">
-            Mimi, you are my calm, my strength, and my favorite person in this world.  
-            Happy Birthday ❤️
-        </p>
+
+        <div id="birthday-section" class="hidden">
+            <div class="birthday-header">🎉 Happy Birthday Mimi! 🎉</div>
+            
+            <!-- Photo Slideshow -->
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <div class="placeholder-slide">
+                        <h3>💝 Our Memories 💝</h3>
+                        <p>Upload your favorite photos below!</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="placeholder-slide">
+                        <h3>❤️ Together Forever ❤️</h3>
+                        <p>Every moment with you is special</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="placeholder-slide">
+                        <h3>🌟 My Everything 🌟</h3>
+                        <p>You make life beautiful</p>
+                    </div>
+                </div>
+                <button class="slide-nav prev" onclick="slideshow.changeSlide(-1)">❮</button>
+                <button class="slide-nav next" onclick="slideshow.changeSlide(1)">❯</button>
+            </div>
+            <div class="dots" id="dots-container"></div>
+
+            <!-- Upload Photos -->
+            <div class="upload-section">
+                <h3>📸 Add Your Favorite Photos</h3>
+                <label for="photo-upload" class="upload-label">
+                    Choose Photos
+                </label>
+                <input type="file" id="photo-upload" class="file-input" accept="image/*" multiple onchange="slideshow.uploadPhotos(event)">
+            </div>
+
+            <!-- Birthday Message -->
+            <p id="message">
+                Mimi, you are my calm, my strength, and my favorite person in this world.  
+                Happy Birthday ❤️
+            </p>
+
+            <!-- Music Control -->
+            <div class="music-control">
+                <button class="music-button" onclick="musicPlayer.toggle()">
+                    🎵 <span id="music-status">Play Birthday Music</span>
+                </button>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 🎂 Mimi's Birthday Date
+        // 🎂 Countdown Timer
         const birthday = new Date("December 29, 2025 00:00:00").getTime();
 
         const daysEl = document.getElementById("days");
         const hoursEl = document.getElementById("hours");
         const minutesEl = document.getElementById("minutes");
         const secondsEl = document.getElementById("seconds");
-        const messageEl = document.getElementById("message");
+        const countdownSection = document.getElementById("countdown-section");
+        const birthdaySection = document.getElementById("birthday-section");
 
         function updateCountdown() {
             const now = new Date().getTime();
             const diff = birthday - now;
 
             if (diff <= 0) {
-                document.getElementById("countdown").style.display = "none";
-                messageEl.classList.remove("hidden");
+                countdownSection.style.display = "none";
+                birthdaySection.classList.remove("hidden");
+                confetti.celebrate();
+                slideshow.init();
                 return;
             }
 
@@ -132,9 +395,147 @@
             secondsEl.textContent = seconds;
         }
 
-        // Run every second
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // 🎊 Confetti Animation
+        const confetti = {
+            colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#ffdee9', '#ff9a9e'],
+            
+            createPiece() {
+                const piece = document.createElement('div');
+                piece.className = 'confetti';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.backgroundColor = this.colors[Math.floor(Math.random() * this.colors.length)];
+                piece.style.animationDelay = Math.random() * 0.5 + 's';
+                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(piece);
+                
+                setTimeout(() => piece.remove(), 3000);
+            },
+            
+            celebrate() {
+                for (let i = 0; i < 150; i++) {
+                    setTimeout(() => this.createPiece(), i * 20);
+                }
+                setTimeout(() => {
+                    for (let i = 0; i < 100; i++) {
+                        setTimeout(() => this.createPiece(), i * 25);
+                    }
+                }, 2000);
+            }
+        };
+
+        // 📸 Photo Slideshow
+        const slideshow = {
+            currentSlide: 0,
+            slides: [],
+            autoPlayInterval: null,
+            
+            init() {
+                this.slides = document.querySelectorAll('.slide');
+                this.createDots();
+                this.startAutoPlay();
+            },
+            
+            createDots() {
+                const dotsContainer = document.getElementById('dots-container');
+                dotsContainer.innerHTML = '';
+                this.slides.forEach((_, index) => {
+                    const dot = document.createElement('span');
+                    dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                    dot.onclick = () => this.goToSlide(index);
+                    dotsContainer.appendChild(dot);
+                });
+            },
+            
+            showSlide(n) {
+                this.slides.forEach(slide => slide.classList.remove('active'));
+                document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+                
+                if (n >= this.slides.length) this.currentSlide = 0;
+                if (n < 0) this.currentSlide = this.slides.length - 1;
+                
+                this.slides[this.currentSlide].classList.add('active');
+                document.querySelectorAll('.dot')[this.currentSlide].classList.add('active');
+            },
+            
+            changeSlide(n) {
+                this.currentSlide += n;
+                this.showSlide(this.currentSlide);
+                this.resetAutoPlay();
+            },
+            
+            goToSlide(n) {
+                this.currentSlide = n;
+                this.showSlide(n);
+                this.resetAutoPlay();
+            },
+            
+            uploadPhotos(event) {
+                const files = event.target.files;
+                const slideshowContainer = document.querySelector('.slideshow-container');
+                
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const slideDiv = document.createElement('div');
+                        slideDiv.className = 'slide';
+                        slideDiv.innerHTML = `<img src="${e.target.result}" alt="Memory">`;
+                        
+                        // Insert before navigation buttons
+                        slideshowContainer.insertBefore(slideDiv, slideshowContainer.querySelector('.slide-nav'));
+                    };
+                    reader.readAsDataURL(file);
+                });
+                
+                setTimeout(() => {
+                    this.slides = document.querySelectorAll('.slide');
+                    this.createDots();
+                    this.showSlide(this.currentSlide);
+                }, 100);
+            },
+            
+            startAutoPlay() {
+                this.autoPlayInterval = setInterval(() => {
+                    this.currentSlide++;
+                    this.showSlide(this.currentSlide);
+                }, 4000);
+            },
+            
+            resetAutoPlay() {
+                clearInterval(this.autoPlayInterval);
+                this.startAutoPlay();
+            }
+        };
+
+        // 🎵 Music Player
+        const musicPlayer = {
+            audio: new Audio(),
+            isPlaying: false,
+            
+            init() {
+                this.audio.loop = true;
+                // Using a free birthday music URL
+                this.audio.src = 'https://www.bensound.com/bensound-music/bensound-happyrock.mp3';
+            },
+            
+            toggle() {
+                if (this.isPlaying) {
+                    this.audio.pause();
+                    this.isPlaying = false;
+                    document.getElementById('music-status').textContent = 'Play Birthday Music';
+                } else {
+                    this.audio.play().catch(e => {
+                        alert('Click again to play music!');
+                    });
+                    this.isPlaying = true;
+                    document.getElementById('music-status').textContent = 'Pause Music';
+                }
+            }
+        };
+
+        musicPlayer.init();
     </script>
 </body>
 </html>
